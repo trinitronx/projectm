@@ -1,0 +1,13 @@
+projectm for Debian
+------------------
+
+
+1. Generate the fully patched source, in a form ready for editing, that would be built to create Debian packages. Doing this with a patch target in debian/rules is recommended; see Main building script: debian/rules.
+2. Modify the source and save those modifications so that they will be applied when building the package.
+3. Remove source modifications that are currently being applied when building the package.
+4. Optionally, document what steps are necessary to upgrade the Debian source package to a new upstream version, if applicable.
+
+Debian policy manual section 4.14
+
+ -- James Cuzella <james.cuzella@lyraphase.com>  Wed, 29 Apr 2020 22:10:40 -0600
+

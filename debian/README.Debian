@@ -1,0 +1,6 @@
+projectm for Ubuntu
+-------------------
+
+Compiled with: --enable-sdl --enable-qt --enable-jack
+
+ -- James Cuzella <james.cuzella@lyraphase.com>  Wed, 29 Apr 2020 22:10:40 -0600

@@ -1,0 +1,11 @@
+projectm (3.1.3-git58e0a516-1-bionic-ppa1) bionic; urgency=medium
+
+  * Switch to ppa1 versioning for release into PPA
+
+ -- James Cuzella <james.cuzella@lyraphase.com>  Thu, 21 May 2020 01:39:06 -0600
+
+projectm (3.1.3-git58e0a516-1-bionic-1) bionic; urgency=medium
+
+  * Initial release
+
+ -- James Cuzella <james.cuzella@lyraphase.com>  Wed, 29 Apr 2020 22:10:40 -0600

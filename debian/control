@@ -1,0 +1,19 @@
+Source: projectm
+Section: universe/sound
+Priority: optional
+Maintainer: James Cuzella <james.cuzella@lyraphase.com>
+Build-Depends: debhelper (>= 10), autoconf, libtool, pkg-config, debianutils (>= 4), libglm-dev, libsdl2-dev, libpulse-dev, libqt5opengl5, libqt5opengl5-dev, libjack-jackd2-dev, qtbase5-dev, qtdeclarative5-dev
+Standards-Version: 4.1.2
+Homepage: https://github.com/projectM-visualizer
+Vcs-Git: https://github.com/projectM-visualizer/projectm.git
+Vcs-Browser: https://github.com/projectM-visualizer/projectm
+
+Package: projectm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: projectM PulseAudio module
+ projectM is an iterative music visualization library which uses
+ OpenGL for hardware acceleration. It is compatible with Milkdrop
+ presets.
+ .
+ This package contains an application to visualize PulseAudio streams.
