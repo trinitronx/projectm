@@ -1,0 +1,34 @@
+Document: projectm
+Title: Debian projectm Manual
+Author: James Cuzella
+Abstract: This manual describes what projectm is
+ and how it can be used to
+ visualize audio on Debian systems.
+Section: Applications/Sound
+
+Format: nroff
+Files: /usr/share/man/man1/projectM-pulseaudio.1.gz
+
+Format: nroff
+Files: /usr/share/man/man1/projectM-jack.1.gz
+
+Format: text
+Files: /usr/share/doc/projectm/projectm guide.txt
+
+Format: text
+Files: /usr/share/doc/projectm/README.md
+
+Format: text
+Files: /usr/share/doc/projectm/BUILDING.md
+
+Format: text
+Files: /usr/share/doc/projectm/LLVM_README.md
+
+Format: text
+Files: /usr/share/doc/projectm/policy.txt
+
+Format: text
+Files: /usr/share/doc/projectm/AUTHORS.txt
+
+Format: text
+Files: /usr/share/doc/projectm/LICENSE.txt
