@@ -1,8 +1,12 @@
 Source: projectm
-Section: universe/sound
+Section: sound
 Priority: optional
 Maintainer: James Cuzella <james.cuzella@lyraphase.com>
-Build-Depends: debhelper (>= 10), autoconf, libtool, pkg-config, debianutils (>= 4), libglm-dev, libsdl2-dev, libpulse-dev, libqt5opengl5, libqt5opengl5-dev, libjack-jackd2-dev, qtbase5-dev, qtdeclarative5-dev
+Build-Depends: debhelper (>= 12.8), autoconf, libtool, pkg-config,
+               debianutils (>= 4), libglm-dev, libsdl2-dev,
+               libpulse-dev, libqt5opengl5, libqt5opengl5-dev,
+               libjack-jackd2-dev, qtbase5-dev, qtdeclarative5-dev,
+               pandoc (>= 2.0)
 Standards-Version: 4.1.2
 Homepage: https://github.com/projectM-visualizer
 Vcs-Git: https://github.com/projectM-visualizer/projectm.git
@@ -11,9 +15,32 @@ Vcs-Browser: https://github.com/projectM-visualizer/projectm
 Package: projectm
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: projectM PulseAudio module
+Breaks: libprojectm2 (<< 3.0),
+        libprojectm2v5 (<< 3.0),
+        libprojectm-data (<< 3.0),
+        libvisual-projectm (<< 3.0),
+        libprojectm-qt1v5 (<< 3.0),
+        projectm-jack (<< 3.0),
+        projectm-pulseaudio (<< 3.0)
+Replaces: libprojectm-data (<< 3.0),
+          libprojectm2 (<< 3.0),
+          libvisual-projectm (<< 3.0),
+          libprojectm-qt1v5 (<< 3.0),
+          projectm-jack (<< 3.0),
+          projectm-pulseaudio (<< 3.0)
+Description: The projectM PulseAudio module
  projectM is an iterative music visualization library which uses
  OpenGL for hardware acceleration. It is compatible with Milkdrop
  presets.
  .
- This package contains an application to visualize PulseAudio streams.
+ This package contains all ProjectM applications to visualize PulseAudio, JackAudio streams.
+ .
+ It also contains the libvisual module enabling support for
+ projectM, Qt4 interfaces to projectM, Qt4 bindings for projectM, and
+ the presets which are distributed with projectM.
+ .
+ This package is going to be deprecated in the Focal Fossa release
+ in the trinitonx/projectm PPA.
+ .
+ The new package in Focal Fossa is planned to split out projectM
+ components into separate packages again.
