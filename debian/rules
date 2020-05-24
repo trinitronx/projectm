@@ -6,3 +6,14 @@
 %:
 	dh $@
 
+
+HTML_DOCS := README.html BUILDING.html LLVM_README.html
+
+%.html: %.md
+	pandoc --from=markdown+smart --to=html --standalone --metadata=pagetitle="ProjectM $(basename $<)" --extract-media=docs_media --output=$@ $<
+## multimarkdown would be nice & more modern, but it's not in Debian yet!
+#	multimarkdown --to=html --full --smart $< > $@
+
+execute_before_dh_clean:
+	rm $(HTML_DOCS) || true
+	rm -rf docs_media/ || true

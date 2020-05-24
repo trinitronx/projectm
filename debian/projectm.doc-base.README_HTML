@@ -1,0 +1,14 @@
+Document: projectm
+Title: Debian ProjectM README (text/html)
+Author:  Mischa Spiegelmock
+Abstract: This manual describes what ProjectM is
+ what presets are, ProjectM Architecture,
+ Keyboard Controls, libprojectm usage,
+ and development information.
+Section: Sound
+
+Format: HTML
+Index: /usr/share/doc/projectm/README.html
+Files: /usr/share/doc/projectm/README.html
+       /usr/share/doc/projectm/BUILDING.html
+       /usr/share/doc/projectm/docs_media/*
