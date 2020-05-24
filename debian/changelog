@@ -1,3 +1,16 @@
+projectm (3.1.3-1~bionic~ppa1~1.gbp44f597) bionic; urgency=medium
+
+  ** SNAPSHOT build @44f597184509310133bd325b21cf558433b045ef **
+
+  * debian/control: Add Breaks & Replaces for bionic package migration to this PPA
+  * Add text/markdown docs to Debian doc-base
+  * Add text/html docs to Debian doc-base.
+    Note: Linked images imported via pandoc --extract-media=docs_media
+  * Fix lintian warning: command-in-menu-file-and-desktop-file
+  * Fix lintian warning: description-synopsis-starts-with-article
+
+ -- James Cuzella <james.cuzella@lyraphase.com>  Sun, 24 May 2020 00:44:05 -0600
+
 projectm (3.1.3-git58e0a516-1-focal-ppa1) focal; urgency=medium
 
   * Add working debian packaging files skeleton
