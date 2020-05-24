@@ -1,3 +1,0 @@
-?package(projectm):needs="X11" section="Applications/Sound"\
-  hints="Music,Visualizer"\
-  title="ProjectM" command="/usr/bin/projectM-pulseaudio"
