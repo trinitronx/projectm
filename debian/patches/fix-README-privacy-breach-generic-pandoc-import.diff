@@ -1,0 +1,11 @@
+--- a/README.md
++++ b/README.md
+@@ -40,7 +40,7 @@
+ 
+ [![Silverjuke](https://github.com/projectM-visualizer/projectm/raw/master/web/silverjuke.png) Silverjuke (FOSS Jukebox)](https://www.silverjuke.net)
+ 
+-[<img src="https://silentradiance.com/demos/projectM_vr/projectm_vr.png" width="200" > Silent Radiance Distance Disco](https://silentradiance.com)
++[![SilentRadiance](https://web.archive.org/web/20200503031901if_/https://silentradiance.com/demos/projectM_vr/projectm_vr.png) Silent Radiance Distance Disco](https://silentradiance.com)
+ 
+ 
+ ***
