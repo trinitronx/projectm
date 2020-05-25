@@ -29,7 +29,7 @@ Replaces: libprojectm-data (<< 3.0),
           libprojectm-qt1v5 (<< 3.0),
           projectm-jack (<< 3.0),
           projectm-pulseaudio (<< 3.0)
-Description: The projectM PulseAudio module provides projectm-pulseaudio
+Description: PulseAudio module for projectM providing projectm-pulseaudio
  projectM is an iterative music visualization library which uses
  OpenGL for hardware acceleration. It is compatible with Milkdrop
  presets.
