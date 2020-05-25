@@ -1,11 +1,21 @@
-projectm (3.1.3-1~focal~ppa1~1.gbp7f7a01) focal; urgency=medium
+projectm (3.1.3-1~focal~ppa1~1.gbp00e096) focal; urgency=medium
 
-  ** SNAPSHOT build @7f7a01440e05a84333bfa79a7565b6faba5cbed2 **
+  ** SNAPSHOT build @00e096ec7b5f6aec9527bf84adcc4f196ae53951 **
 
   * Rebuild with packaging fixes for focal
   * Removing old debian/files
+  * Remove duplicate doc-base entries
+  * Fix Lintian warning: description-starts-with-package-name
+  * Only build Qt and PulseAudio apps.
+    Fix Lintian warning: binary-without-manpage
+    ... by avoiding building: usr/bin/projectMSDL, usr/bin/projectM-unittest
+  * Fix Lintian errors: arch-dependent-file-in-usr-share,
+    non-empty-dependency_libs-in-la-file
+  * Fix pbuilder missing Build-Depends for Qt5
+  * Fix Lintian warning: duplicate-font-file
+  * Fix Lintian warning: description-synopsis-starts-with-article
 
- -- James Cuzella <james.cuzella@lyraphase.com>  Sun, 24 May 2020 06:21:29 -0600
+ -- James Cuzella <james.cuzella@lyraphase.com>  Mon, 25 May 2020 05:28:50 -0600
 
 projectm (3.1.3-1~bionic~ppa1~1.gbp44f597) bionic; urgency=medium
 
