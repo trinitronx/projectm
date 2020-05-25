@@ -15,7 +15,7 @@ Vcs-Browser: https://github.com/projectM-visualizer/projectm
 
 Package: projectm
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ttf-bitstream-vera, ttf-dejavu-core, ${shlibs:Depends}, ${misc:Depends}
 Breaks: libprojectm2 (<< 3.0),
         libprojectm2v5 (<< 3.0),
         libprojectm-data (<< 3.0),

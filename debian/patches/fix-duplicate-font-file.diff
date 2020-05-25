@@ -1,0 +1,29 @@
+Description: Fix Lintian warning duplicate-font-file
+ Change default Vera TTF font paths to use
+ those from the ttf-bitstream-vera pacakage
+ .
+ Fixes lintian warnings:
+ .
+   W: projectm: duplicate-font-file usr/share/projectM/fonts/Vera.ttf also in ttf-bitstream-vera
+   W: projectm: duplicate-font-file usr/share/projectM/fonts/VeraMono.ttf also in ttf-bitstream-vera
+   W: projectm: truetype-font-prohibits-installable-embedding [preview/print only] usr/share/projectM/fonts/Vera.ttf
+   W: projectm: truetype-font-prohibits-installable-embedding [preview/print only] usr/share/projectM/fonts/VeraMono.ttf
+Author:  James Cuzella <james.cuzella@lyraphase.com>
+Origin: other
+Last-Update: 2020-05-25
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/src/libprojectM/projectM.cpp
++++ b/src/libprojectM/projectM.cpp
+@@ -196,9 +196,9 @@
+ 
+ #ifdef __unix__
+     _settings.titleFontURL = config.read<string>
+-            ( "Title Font", "/usr/local/share/projectM/fonts/Vera.tff" );
++            ( "Title Font", "/usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf" );
+     _settings.menuFontURL = config.read<string>
+-            ( "Menu Font", "/usr/local/share/projectM/fonts/VeraMono.tff" );
++            ( "Menu Font", "/usr/share/fonts/truetype/ttf-bitstream-vera/VeraMono.ttf" );
+ #endif
+ 
+ #ifdef WIN32

@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 #export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_CPPFLAGS_MAINT_APPEND  = -DDEFAULT_FONT_PATH=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSansMono.ttf
 #export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 #export DH_VERBOSE = 1
@@ -34,6 +35,7 @@ execute_after_dh_install:
 	mkdir -p $(CURDIR)/debian/projectm/usr/lib/projectM
 	find  $(CURDIR)/debian/projectm/usr/share/projectM/presets/ -type f -iname '*.so'  -print0 | \
         xargs -0 -n1 -I{} mv '{}' $(CURDIR)/debian/projectm/usr/lib/projectM/
+	find  $(CURDIR)/debian/projectm/usr/share/projectM/fonts/ -type f -iname '*.ttf' -delete
 
 
 execute_before_dh_clean:
