@@ -24,6 +24,18 @@ HTML_DOCS := README.html BUILDING.html LLVM_README.html
 ## multimarkdown would be nice & more modern, but it's not in Debian yet!
 #	multimarkdown --to=html --full --smart $< > $@
 
+execute_before_dh_install: $(HTML_DOCS)
+	:
+
+execute_after_dh_install:
+	@# Delete libtool archive files as per Debian Policy Manual
+	find  $(CURDIR)/debian/projectm/usr/lib/ -type f \( -iname '*.la' -o -iname '*.a' \) -delete
+	find  $(CURDIR)/debian/projectm/usr/share/projectM/presets/ -type f \( -iname '*.la' -o -iname '*.a' \) -delete
+	mkdir -p $(CURDIR)/debian/projectm/usr/lib/projectM
+	find  $(CURDIR)/debian/projectm/usr/share/projectM/presets/ -type f -iname '*.so'  -print0 | \
+        xargs -0 -n1 -I{} mv '{}' $(CURDIR)/debian/projectm/usr/lib/projectM/
+
+
 execute_before_dh_clean:
 	rm $(HTML_DOCS) || true
 	rm -rf docs_media/ || true
