@@ -11,4 +11,5 @@ Format: HTML
 Index: /usr/share/doc/projectm/README.html
 Files: /usr/share/doc/projectm/README.html
        /usr/share/doc/projectm/BUILDING.html
+       /usr/share/doc/projectm/LLVM_README.html
        /usr/share/doc/projectm/docs_media/*

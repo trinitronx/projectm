@@ -1,9 +1,14 @@
 Document: projectm
-Title: Debian projectm Manual
+Title: Debian projectm Manual (text/markdown)
 Author: James Cuzella
-Abstract: This manual describes what projectm is
+Abstract: This manual describes what ProjectM is
  and how it can be used to
  visualize audio on Debian systems.
+ .
+ It also describes what presets are,
+ ProjectM Architecture,
+ Keyboard Controls, libprojectm usage,
+ and development information.
 Section: Sound
 
 Format: text
