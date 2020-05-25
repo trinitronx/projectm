@@ -1,8 +1,11 @@
-projectm (3.1.3-1~focal~ppa1~1.gbp00e096) focal; urgency=medium
+projectm (3.1.3-1~focal~ppa1~1.gbpc4c121) focal; urgency=medium
 
-  ** SNAPSHOT build @00e096ec7b5f6aec9527bf84adcc4f196ae53951 **
+  ** SNAPSHOT build @c4c121e52cf5277482473b57974ab44d3e0b6d81 **
 
   * Rebuild with packaging fixes for focal
+  * Fix Lintian warning: privacy-breach-generic.
+    Note: pandoc --extract-media missed this image due to 404
+    Used web.archive.org mirror & convert img reference to Markdown
   * Removing old debian/files
   * Remove duplicate doc-base entries
   * Fix Lintian warning: description-starts-with-package-name
