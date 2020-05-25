@@ -2,10 +2,20 @@
 #export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 #export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+#export DH_VERBOSE = 1
+
+# Use this variable to pass configure options for projectM to automake
+PROJECTM_AUTOMAKE_FLAGS = \
+                --enable-sdl=no \
+                --enable-emscripten=no \
+                --enable-qt=yes \
+                --enable-pulseaudio=yes \
 
 %:
 	dh $@
 
+override_dh_auto_configure:
+	dh_auto_configure -- $(PROJECTM_AUTOMAKE_FLAGS)
 
 HTML_DOCS := README.html BUILDING.html LLVM_README.html
 
