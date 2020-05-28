@@ -27,6 +27,11 @@ HTML_DOCS := README.html BUILDING.html LLVM_README.html
 
 execute_before_dh_install: $(HTML_DOCS)
 	:
+	@# We need network during pandoc --extract-media steps
+	@echo -e '\n---------------\nBUILD DEBUGGING\n---------------\n'
+	cat /etc/resolv.conf
+	ifconfig
+	curl -v ifconfig.co
 
 execute_after_dh_install:
 	@# Delete libtool archive files as per Debian Policy Manual
