@@ -1,24 +1,25 @@
-projectm (3.1.3-1~focal~ppa1~1.gbpc4c121) focal; urgency=medium
+projectm (3.1.3-1~focal~ppa1~1.gbp2dc3a2) focal; urgency=medium
 
-  ** SNAPSHOT build @c4c121e52cf5277482473b57974ab44d3e0b6d81 **
+  ** SNAPSHOT build @2dc3a2d9f1b93ac0d694003758013f7ec51d9f04 **
 
   * Rebuild with packaging fixes for focal
-  * Fix Lintian warning: privacy-breach-generic.
-    Note: pandoc --extract-media missed this image due to 404
-    Used web.archive.org mirror & convert img reference to Markdown
   * Removing old debian/files
   * Remove duplicate doc-base entries
   * Fix Lintian warning: description-starts-with-package-name
   * Only build Qt and PulseAudio apps.
     Fix Lintian warning: binary-without-manpage
     ... by avoiding building: usr/bin/projectMSDL, usr/bin/projectM-unittest
-  * Fix Lintian errors: arch-dependent-file-in-usr-share,
-    non-empty-dependency_libs-in-la-file
+  * Fix Lintian errors: arch-dependent-file-in-usr-share, non-empty-dependency_libs-in-la-file
   * Fix pbuilder missing Build-Depends for Qt5
   * Fix Lintian warning: duplicate-font-file
   * Fix Lintian warning: description-synopsis-starts-with-article
+  * Fix Lintian warning: privacy-breach-generic.
+    Note: pandoc --extract-media missed this image due to 404
+    Used web.archive.org mirror & convert img reference to Markdown
+  * Add network build dependencies for pandoc --extract-media
+  * Add network debugging info for PPA pbuilder build output
 
- -- James Cuzella <james.cuzella@lyraphase.com>  Mon, 25 May 2020 05:28:50 -0600
+ -- James Cuzella <james.cuzella@lyraphase.com>  Wed, 27 May 2020 19:10:45 -0600
 
 projectm (3.1.3-1~bionic~ppa1~1.gbp44f597) bionic; urgency=medium
 
