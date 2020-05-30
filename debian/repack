@@ -97,7 +97,7 @@ for dir in "${nonfree_image_dirs[@]}" ; do
          -exec sh -c 'identify -verbose "$0" 2>/dev/null | \
                       grep -v "free of known copyright restrictions" | \
                       grep -iq copyright && printf "$0\0"' {} \; | \
-      xargs -0 exiftool "-icc_profile<=${replacement_icc_profile}"
+      xargs -0 exiftool -overwrite_original "-icc_profile<=${replacement_icc_profile}"
 done
 
 printf "Rebuilding DFSG-free upstream source tarball:\n"
