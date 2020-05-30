@@ -7,7 +7,8 @@ Build-Depends: debhelper (>= 12.8), autoconf, libtool, pkg-config,
                libpulse-dev, libqt5opengl5, libqt5opengl5-dev,
                libjack-jackd2-dev, qtbase5-dev, qtdeclarative5-dev,
                qtbase5-dev, qtchooser, libpthread-stubs0-dev,
-               pandoc (>= 2.0), ca-certificates, openssl, netbase, net-tools, curl
+               pandoc (>= 2.0), ca-certificates, openssl, netbase,
+               libimage-exiftool-perl, imagemagick, colord
 Standards-Version: 4.1.2
 Homepage: https://github.com/projectM-visualizer
 Vcs-Git: https://github.com/projectM-visualizer/projectm.git

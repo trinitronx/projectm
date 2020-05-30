@@ -1,6 +1,14 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: projectm
 Source: https://github.com/projectM-visualizer/projectm
+ The pristine upstream source contains Markdown files, that are
+ regenerated as HTML via pandoc. This includes downloading images
+ into docs_media/.  Some of these images have been created
+ by Apple's screenshot utility, which embeds non-free ICC color profiles
+ into the EXIF data. This violates DFSG §2.
+ .
+ The ‘debian/repack’ program removes those ICC profiles and replaces them
+ to create the Debian upstream source tarball.
 
 Files: *
 Copyright: 2003-2020 projectM Team

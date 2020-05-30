@@ -1,0 +1,144 @@
+#!/bin/bash -x
+# debian/repack.stub
+
+# Part of the Debian package 'projectm-*'.
+
+# Copyright © 2020 James Cuzella <james.cuzella@lyraphase.com>
+# This is free software; see the end of this file for license terms.
+
+# debian/repack.stub: Wrapper for uupdate
+# 
+#   - Runs pandoc --extract-media & removes
+#   - Removes Apple Screenshot utility ICC Profile in EXIF data
+#   - Repacks free alternative ICC profile: AppleRGB.icc from icc-profiles-free
+
+# Based on:
+# debian/repack
+#
+# Copyright © 2013–2014 Ben Finney <ben+debian@benfinney.id.au>
+# This is free software; see the end of this file for license terms.
+
+# Convert the pristine upstream source to the Debian upstream source.
+#
+# This program is designed for use with the ‘uscan(1)’ tool, as the
+# “action” parameter for the ‘debian/watch’ configuration file.
+
+set -o errexit
+set -o errtrace
+set -o pipefail
+set -o nounset
+
+program_dir="$(dirname "$(realpath --strip "$0")")"
+source "${program_dir}"/source_package_build.bash
+
+function usage() {
+    local progname=$(basename $0)
+    printf "$progname --upstream-version VERSION\n"
+    printf "\n"
+    printf "Note: This uscan custom script supports uscan v4 CLI API\n"
+    printf "      see man uscan\n"
+}
+
+if [ $# -ne 2 ] ; then
+    usage
+    exit 1
+fi
+
+upstream_version="$2"
+#downloaded_file="$3"
+
+symlink_filename="../${upstream_tarball_basename}.tar.xz"
+target_filename="${release_dfsg_tarball_basename}.tar.xz"
+target_working_file="${working_dir}/${target_filename}"
+target_file="$(dirname "${downloaded_file}")/${target_filename}"
+
+repack_dir="${working_dir}/${dfsg_dirname}"
+
+printf "Unpacking pristine upstream source ‘${downloaded_file}’:\n"
+
+extract_tarball_to_working_dir "${downloaded_file}"
+
+upstream_source_dirname=$(ls -1 "${working_dir}")
+upstream_source_dir="${working_dir}/${upstream_source_dirname}"
+
+printf "Repackaging upstream source from ‘${upstream_source_dir}’ to ‘${repack_dir}’:\n"
+
+mv "${upstream_source_dir}" "${repack_dir}"
+
+printf "Removing non-DFSG-free files:\n"
+
+nonfree_fileglobs=(
+        )
+
+for fileglob in "${nonfree_fileglobs[@]}" ; do
+    echo rm -v "${repack_dir}"/$fileglob
+done
+
+printf "Generating HTML docs from Markdown files:\n"
+
+${program_dir}/rules -C ${repack_dir} repack_source_docs_media
+
+nonfree_image_dirs=(
+        docs_media/
+		web/
+		presets/presets_tryptonaut/
+		src/projectM-qt/images/
+		src/projectM-iTunes/images/
+		src/projectM-iTunes/projectM\ screenshots/
+        )
+
+replacement_icc_profile='/usr/share/color/icc/colord/sRGB.icc'
+
+printf "Removing non-DFSG-free ICC image color profiles:\n"
+
+for dir in "${nonfree_image_dirs[@]}" ; do
+    find "${repack_dir}/${dir}" -regextype posix-extended \
+         -iregex '.*\.(jpg|png|svg)' \
+         -exec sh -c 'identify -verbose "$0" 2>/dev/null | \
+                      grep -v "free of known copyright restrictions" | \
+                      grep -iq copyright && printf "$0\0"' {} \; | \
+      xargs -0 exiftool "-icc_profile<=${replacement_icc_profile}"
+done
+
+printf "Rebuilding DFSG-free upstream source tarball:\n"
+
+archive_working_dirname_to_tarball "${dfsg_dirname}" "${target_working_file}"
+
+printf "Moving completed upstream tarball to ‘${target_file}’:\n"
+
+rm -v "${downloaded_file}"
+mv "${target_working_file}" "${target_file}"
+
+printf "Creating symlink ${symlink_filename} -> $(basename ${target_file})\n"
+pwd
+ln -sf "$(basename ${target_file})" "${symlink_filename}"
+
+printf "Done.\n"
+
+
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# “Software”), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+# 
+# The Software is provided “as is”, without warranty of any kind,
+# express or implied, including but not limited to the warranties of
+# merchantability, fitness for a particular purpose and noninfringement.
+# In no event shall the authors or copyright holders be liable for any
+# claim, damages or other liability, whether in an action of contract,
+# tort or otherwise, arising from, out of or in connection with the
+# Software or the use or other dealings in the Software.
+
+
+# Local variables:
+# coding: utf-8
+# mode: sh
+# indent-tabs-mode: nil
+# End:
+# vim: fileencoding=utf-8 filetype=bash :

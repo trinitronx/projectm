@@ -9,12 +9,16 @@ version=4
 # PGP signature mangle, so foo.tar.gz has foo.tar.gz.sig
 #opts="pgpsigurlmangle=s%$%.sig%"
 
+# Note: default uupdate command overridden
+# debian/repack.stub: Wrapper for uupdate
+#   runs pandoc --extract-media, removes non-DFSG files & ICC color profiles
+
 # GitHub hosted projects
-opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%<project>-$1.tar.gz%" \
-   https://github.com/projectM-visualizer/projectm/tags \
-   (?:.*?/)?v?(\d[\d.]*)\.tar\.gz debian uupdate
+opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%projectm-$1.tar.gz%" \
+  https://github.com/projectM-visualizer/projectm/tags \
+  (?:.*?/)?v?(\d[\d.]*)\.tar\.gz debian debian/repack
 
 # Direct Git
-# opts="mode=git" https://github.com/projectM-visualizer/projectm.git \
-#   refs/tags/v([\d\.]+) debian uupdate
+opts="mode=git, dversionmangle=s/\+dfsg\.\d+$//" https://github.com/projectM-visualizer/projectm.git \
+  refs/tags/v([\d\.]+) debian debian/repack
 
