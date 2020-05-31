@@ -76,8 +76,17 @@ non_dfsg_version_base=$(printf "${release_version}" \
         | perl -p -e "s/$DEB_EXT//; " -e 's/^\d+://; ' -e 's/[-][^-]+$//;')
 
 # Now strip all debian family distro specific version strings (following a '~')
-upstream_normalized_version_base=$(printf "${non_dfsg_version_base}" \
+release_normalized_version=$(printf "${non_dfsg_version_base}" \
         | perl -p -e "s/~.*$//; " -e 's/[-][^-]+$//;')
+
+upstream_normalized_version=$(printf "${upstream_version}" \
+        | perl -p -e "s/~.*$//; " -e 's/[-][^-]+$//;')
+
+# Intelligently update upstream_version with +dfsg.1
+# to make newly versioned orig release tarball
+if dpkg --compare-versions $release_normalized_version '<<' "$upstream_version" ; then
+  release_dfsg_version="${upstream_normalized_version}+dfsg.1"
+fi
 
 upstream_dirname="${package_name}-${non_dfsg_version_base}"
 dfsg_dirname="${package_name}-${release_dfsg_version}"
@@ -89,7 +98,7 @@ if [ ! -f "$downloaded_file" ]; then
   if [ "$TRY_HARDER" -eq 1  ]; then
   # Try to be smarter about detection of tarball uscan downloaded
   downloaded_file="$(find ../ -maxdepth 1 -type f -regextype posix-extended \
-	-iregex "../${package_name}-${upstream_normalized_version_base}.*\.tar\.(xz|gz|bz2)" -printf "%T@  %p\n" | \
+	-iregex "../${package_name}-${release_normalized_version}.*\.tar\.(xz|gz|bz2)" -printf "%T@  %p\n" | \
 	sort -n -r  | head -n1 | awk '{print $2 }')"
   else
 	  echo "ERROR: Could not find pristine source tarball: $downloaded_file" >&2

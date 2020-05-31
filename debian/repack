@@ -73,7 +73,7 @@ Repacks upstream source code tarball to follow Debian Free Software Guidelines
                        Uses a regex heuristic to find the latest timestamped
                        file matching this pattern:
 
-                        \${package_name}-\${upstream_normalized_version_base}.*\.tar\.(xz|gz|bz2)
+                        \${package_name}-\${release_normalized_version}.*\.tar\.(xz|gz|bz2)
 
                        The normalized version is the same as the upstream, just
 					   striped of any downstream version string patterns.
