@@ -1,3 +1,17 @@
+projectm (3.1.3.14.g44ab74e7+dfsg.1~focal~ppa1) focal; urgency=medium
+
+  * Rebuild with packaging fixes for focal
+  * Remove debugging command
+  * Add proper CLI flag handling & help to debian/repack
+  * Add --try-harder option to debian/repack
+  * Improvements to debian/source_package_build.bash
+  * Fix release_dfsg_version for upstream tarball
+  * Build orig.tar.xz from upstream master
+  * Document source package maintenance in debian/README.source
+  * Add upstream signing RSA key 4AEE18F83AFDEB23
+
+ -- James Cuzella <james.cuzella@lyraphase.com>  Sun, 31 May 2020 04:18:41 -0600
+
 projectm (3.1.3+dfsg-1~focal~ppa1~1.gbp767328) focal; urgency=medium
 
   ** SNAPSHOT build @f4b0f8d6385439f4bf28255582e8bc55e6520aa5 **
