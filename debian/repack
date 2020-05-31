@@ -1,12 +1,12 @@
 #!/bin/bash -x
-# debian/repack.stub
+# debian/repack
 
 # Part of the Debian package 'projectm-*'.
 
 # Copyright © 2020 James Cuzella <james.cuzella@lyraphase.com>
 # This is free software; see the end of this file for license terms.
 
-# debian/repack.stub: Wrapper for uupdate
+# debian/repack: Wrapper for uupdate
 # 
 #   - Runs pandoc --extract-media & removes
 #   - Removes Apple Screenshot utility ICC Profile in EXIF data
@@ -23,29 +23,99 @@
 # This program is designed for use with the ‘uscan(1)’ tool, as the
 # “action” parameter for the ‘debian/watch’ configuration file.
 
-set -o errexit
 set -o errtrace
 set -o pipefail
 set -o nounset
 
+PROGNAME="$(basename "$0")"
+
 program_dir="$(dirname "$(realpath --strip "$0")")"
-source "${program_dir}"/source_package_build.bash
 
 function usage() {
     local progname=$(basename $0)
-    printf "$progname --upstream-version VERSION\n"
-    printf "\n"
-    printf "Note: This uscan custom script supports uscan v4 CLI API\n"
-    printf "      see man uscan\n"
+    cat << EOF
+Usage: ${progname} --upstream-version VERSION [-v]
+
+Repacks upstream source code tarball to follow Debian Free Software Guidelines
+
+	uscan feeds this script the upstream version of the latest upstream source code
+	The --upstream-version flag should match the *.orig.tar.xz filename downloaded
+
+    If the --upstream-version passed does not match, this script searches for
+	the latest downloaded tarball matching package name, upstream-version,
+	a simplified version string striped of trailing Debian or Ubuntu versions
+	such as: '+dfsg.1', '~ubuntu.*' etc..
+
+	The upstream tarball must also match:  *.tar.(xz|gz|bz2)
+
+	This script runs the debian/rules 'repack_source_docs_media' target, to
+	generate HTML docs, and download images to embed within the source package
+    Finally, it strips non-free ICC color profiles from all images, as per DFSG.
+
+
+    Note: This uscan custom script only supports uscan v4 CLI API
+          see: man uscan
+
+    -h                 Help. Display this usage message and exit.
+
+    -v                 Verbose output.
+
+    --upstream-version VERSION
+                       Verbose output.
+
+EOF
 }
 
-if [ $# -ne 2 ] ; then
-    usage
-    exit 1
+ARGUMENT_LIST=(
+    "upstream-version:"
+	"help"
+)
+
+# read arguments
+opts=$(getopt \
+    --longoptions "$(printf "%s," "${ARGUMENT_LIST[@]}")" \
+    --name "$PROGNAME" \
+    --options "hv" \
+    -- "$@"
+)
+
+eval set -- $opts
+
+# parse options (if any exist)
+while true; do
+	echo "$1"
+    case "$1" in
+        -h)  usage
+			shift
+            exit 0
+            ;;
+        --help) shift
+			usage
+            exit 0
+            ;;
+        --upstream-version) shift
+			upstream_version="$1"
+			;;
+        --) shift
+			break
+			;;
+        *)  usage
+			shift
+            exit 1
+            ;;
+    esac
+  shift
+done
+
+if [ -z "$upstream_version" ]; then
+	echo "ERROR: upstream-version must bet set!" >&2
+	usage
+	exit 1
 fi
 
-upstream_version="$2"
-#downloaded_file="$3"
+set -o errexit
+
+source "${program_dir}"/source_package_build.bash
 
 symlink_filename="../${upstream_tarball_basename}.tar.xz"
 target_filename="${release_dfsg_tarball_basename}.tar.xz"
