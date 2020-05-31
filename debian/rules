@@ -33,9 +33,7 @@ repack_source_docs_media: $(HTML_DOCS)
 	@# We need network during pandoc --extract-media steps
 	@# So, HTML_DOCS + docs_media/* need to be included with the source package
 	@# Run this via DEBUILD_DPKG_SOURCE_HOOK
-	@echo -e '\n---------------\nBUILD DEBUGGING\n---------------\n'
-	@echo 'LEFTOVER COPYRIGHT ICC Profiles'
-	find docs_media/ -type f -regextype posix-extended -iregex '.*\.(jpg|png|svg)' -exec sh -c 'identify -verbose "$$0" 2>/dev/null | grep -v "free of known copyright restrictions" | grep -iq copyright && echo "$$0"' {} \;
+
 execute_after_dh_install:
 	@# Delete libtool archive files as per Debian Policy Manual
 	find  $(CURDIR)/debian/projectm/usr/lib/ -type f \( -iname '*.la' -o -iname '*.a' \) -delete
