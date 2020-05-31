@@ -28,6 +28,8 @@ set -o pipefail
 set -o nounset
 
 PROGNAME="$(basename "$0")"
+REPACK_VERBOSE=0
+TRY_HARDER=0
 
 program_dir="$(dirname "$(realpath --strip "$0")")"
 
@@ -56,18 +58,32 @@ Repacks upstream source code tarball to follow Debian Free Software Guidelines
     Note: This uscan custom script only supports uscan v4 CLI API
           see: man uscan
 
-    -h                 Help. Display this usage message and exit.
+    -h, --help         Help. Display this usage message and exit.
 
     -v                 Verbose output.
 
     --upstream-version VERSION
-                       Verbose output.
+                       The version used to find the pristine upstream source tar
+
+                       Must match pattern that uscan uses:
+
+                       \${package_name}-\${upstream_version}.tar.xz
+
+    --try-harder       Try harder to find the upstream tarball
+                       Uses a regex heuristic to find the latest timestamped
+                       file matching this pattern:
+
+                        \${package_name}-\${upstream_normalized_version_base}.*\.tar\.(xz|gz|bz2)
+
+                       The normalized version is the same as the upstream, just
+					   striped of any downstream version string patterns.
 
 EOF
 }
 
 ARGUMENT_LIST=(
     "upstream-version:"
+    "try-harder"
 	"help"
 )
 
@@ -91,6 +107,14 @@ while true; do
             ;;
         --help) shift
 			usage
+            exit 0
+            ;;
+        --verbose) shift
+			REPACK_VERBOSE=1
+            exit 0
+            ;;
+        --try-harder) shift
+			TRY_HARDER=1
             exit 0
             ;;
         --upstream-version) shift
